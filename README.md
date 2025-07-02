@@ -1,0 +1,29 @@
+
+# compsuppress
+
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+compsuppress allows for easy complementary data suppression via a
+singular function call. This is done via a recursive call stack and a
+series of helper functions.
+
+## Installation
+
+You can install the development version of compsuppress from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("JuliaHealeyParera/compsuppress")
+```
+
+## Example
+
+Basic examples will soon be housed below.
+
+``` r
+library(compsuppress)
+## basic example code coming soon
+```

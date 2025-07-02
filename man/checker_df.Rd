@@ -4,14 +4,14 @@
 \alias{checker_df}
 \title{Check a dataframe for current suppression}
 \usage{
-checker_df(df, supp_cols, regex_suppchar)
+checker_df(df, supp_col, regex_char)
 }
 \arguments{
 \item{df}{Dataframe to be checked.}
 
-\item{supp_cols}{Columns to be checked for suppression.}
+\item{supp_col}{Columns to be checked for suppression.}
 
-\item{regex_suppchar}{Suppression character to check for (special char. processed)}
+\item{regex_char}{Suppression character to check for (special char. processed)}
 }
 \value{
 A dataframe.
@@ -20,7 +20,8 @@ A dataframe.
 Check a dataframe for current suppression
 }
 \examples{
-x <- data.frame(x = c('2', '*', '*', '3', '5', '2'), y = c('*', '3', '5', '*', '2', '*'))
-supp_col <- c('x','y')
-regex_suppchar <- '\\\\*'
+x <- data.frame(x = c('2', '*', '*', '3', '5', '2'),y = c('*', '3', '5', '*', '2', '*'))
+
+checker_df(x, c('x','y'), '\\\\*')
+checker_df(x, c('x'), '2')
 }

@@ -1,27 +1,40 @@
 # Thoughts:
 # Should we define a new data object type, one that has print value and underlying value,
-# to allow for supppressed values to be used in aggregate calculations?
-# Process as NA/0 for purporses of aggregation, but input special char. for purposes
+# to allow for suppressed values to be used in aggregate calculations?
+# Process as NA/0 for purposes of aggregation, but input special char. for purposes
 # of printing
 
 #' Check a dataframe for current suppression
 #'
 #' @param df Dataframe to be checked.
-#' @param supp_cols Columns to be checked for suppression.
-#' @param regex_suppchar Suppression character to check for (special char. processed)
+#' @param supp_col Columns to be checked for suppression.
+#' @param regex_char Suppression character to check for (special char. processed)
 #'
 #' @returns A dataframe.
 #' @export
 #'
 #' @examples
-#' x <- data.frame(x = c('2', '*', '*', '3', '5', '2'), y = c('*', '3', '5', '*', '2', '*'))
-#' supp_col <- c('x','y')
-#' regex_suppchar <- '\\*'
-checker_df <- function(df, supp_cols, regex_suppchar) {
+#' x <- data.frame(x = c('2', '*', '*', '3', '5', '2'),y = c('*', '3', '5', '*', '2', '*'))
+#'
+#' checker_df(x, c('x','y'), '\\*')
+#' checker_df(x, c('x'), '2')
+checker_df <- function(df, supp_col, regex_char) {
+  stopifnot(
+    inherits(df, 'data.frame'),
+    inherits(regex_char, 'character') | inherits(regex_char, 'numeric'),
+    nrow(df) > 0,
+    ncol(df) > 0 ,
+    regex_char != '',
+    length(supp_col) > 0,
+    supp_col %in% names(df)
+    )
+  if (inherits(regex_char,'numeric')) {
+    regex_char = as.character(regex_char)
+  }
   checker <- df |>
     # If a value has been suppressed, replace it with 1.
     # If a value has not been suppressed, replace it with 0.
-    mutate_at(supp_cols, ~ as.numeric(str_detect(., regex_suppchar)))
+    dplyr::mutate_at(supp_col, ~ as.numeric(stringr::str_detect(., regex_char)))
 
   return (checker)
 }
