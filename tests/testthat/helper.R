@@ -23,3 +23,14 @@ suppressed_df <- function() {
     y = c('4', '1', '*')
   )
 }
+
+
+#' Standard suppression regex character
+#'
+#' @returns A character string.
+#'
+#' @examples
+#' rc()
+rc <- function() {
+  return("\\*")
+}
