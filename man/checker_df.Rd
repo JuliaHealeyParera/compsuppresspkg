@@ -20,7 +20,11 @@ A dataframe.
 Check a dataframe for current suppression
 }
 \examples{
-x <- data.frame(x = c('2', '*', '*', '3', '5', '2'),y = c('*', '3', '5', '*', '2', '*'))
+x <-
+ data.frame(
+   x = c('2', '*', '*', '3', '5', '2'),
+   y = c('*', '3', '5', '*', '2', '*')
+)
 
 checker_df(x, c('x','y'), '\\\\*')
 checker_df(x, c('x'), '2')
