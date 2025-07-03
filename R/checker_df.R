@@ -4,6 +4,15 @@
 # Process as NA/0 for purposes of aggregation, but input special char. for purposes
 # of printing
 
+# Response:
+# That is a cool idea - and I kinda want to do it for fun because I think
+# that would be useful for many things and I don't know how I would do
+# that in something like R. However - folks, or pipelines
+# will already have access to the raw data in memory to give the functions.
+# So they will have an unsuppressed version - so I we should return a suppressed
+# dataframe to keep it simple to get the job done - but we should circle back
+# to that - also we should get a github project going for discussions :D
+
 #' Check a dataframe for current suppression
 #'
 #' @param df Dataframe to be checked.
