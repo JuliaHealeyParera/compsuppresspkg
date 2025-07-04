@@ -84,17 +84,29 @@ test_that("checker_df() requires dataframe as input", {
 test_that("checker_df() requires supp_col to be in df", {
   df <- suppressed_df()
   rc <- rc()
-  bad_cols <- c("y", "z")
+  some_bad_cols <- c("y", "z")
+  all_bad_cols <- c("q", "g")
   good_cols <- c("x", "y")
 
+  # all bad cols
   expect_error(
     checker_df(
       df = df,
-      supp_col = bad_cols,
+      supp_col = all_bad_cols,
       regex_char = rc
     )
   )
 
+  # some cols
+  expect_error(
+    checker_df(
+      df = df,
+      supp_col = some_bad_cols,
+      regex_char = rc
+    )
+  )
+
+  # good to go
   expect_no_error(
     checker_df(
       df = df,
@@ -105,31 +117,65 @@ test_that("checker_df() requires supp_col to be in df", {
 })
 
 test_that("checker_df() allows number as regex character", {
-  expect_equal(
-    checker_df(
-      data.frame(
-        x = c('*', '3', '4'),
-        y = c('4', '1', '*')
-      ),
-      c('x', 'y'),
-      '4'
-    ),
+  df <- suppressed_df()
+  comparison_df <-
     data.frame(
       x = c(0, 0, 1),
       y = c(1, 0, 0)
     )
+
+  expect_equal(
+    checker_df(
+      df = df,
+      supp_col = c('x', 'y'),
+      '4'
+    ),
+    comparison_df
   )
+
+  # I can't rememebr exactly how crucial
+  # this func is - if it sees alot of use
+  # we may want to allow numerics, maybe non-standard eval
+  # and convert before eval etc...
+
+  # expect_equal(
+  #   checker_df(
+  #     df = df,
+  #     supp_col = c('x', 'y'),
+  #     4
+  #   ),
+  #   comparison_df
+  # )
 })
 
 test_that("checker_df() requires suppression character", {
+  df <- suppressed_df()
+  empty_char <- ""
+  cols <- c("x", "y")
+
+  # empty char
   expect_error(
     checker_df(
-      data.frame(
-        x = c('*', '3', '4'),
-        y = c('4', '1', '*')
-      ),
-      c('x', 'y'),
-      ''
+      df = df,
+      supp_col = cols,
+      regex_char = empty_char
+    )
+  )
+
+  # nothing
+  expect_error(
+    checker_df(
+      df = df,
+      supp_col = cols
+    )
+  )
+
+  # good to go
+  expect_no_error(
+    checker_df(
+      df = df,
+      supp_col = cols,
+      regex_char = "&"
     )
   )
 })
