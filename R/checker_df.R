@@ -1,18 +1,3 @@
-# Thoughts:
-# Should we define a new data object type, one that has print value and underlying value,
-# to allow for suppressed values to be used in aggregate calculations?
-# Process as NA/0 for purposes of aggregation, but input special char. for purposes
-# of printing
-
-# Response:
-# That is a cool idea - and I kinda want to do it for fun because I think
-# that would be useful for many things and I don't know how I would do
-# that in something like R. However - folks, or pipelines
-# will already have access to the raw data in memory to give the functions.
-# So they will have an unsuppressed version - so I we should return a suppressed
-# dataframe to keep it simple to get the job done - but we should circle back
-# to that - also we should get a github project going for discussions :D
-
 #' Check a dataframe for current suppression
 #'
 #' @param df Dataframe to be checked.
@@ -56,6 +41,7 @@ checker_df <- function(df, supp_col, regex_char) {
   # If a value has been suppressed, replace it with 1.
   # If a value has not been suppressed, replace it with 0.
   df |>
+    dplyr::select(tidyselect::all_of(supp_col)) |>
     dplyr::mutate(
       dplyr::across(
         dplyr::all_of(supp_col),

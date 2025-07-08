@@ -7,11 +7,12 @@
 unsuppressed_df <- function() {
   data.frame(
     x = c(1, 3, 4),
-    y = c(4, 1, 2)
+    y = c(4, 1, 2),
+    z = c(1, 2, 3)
   )
 }
 
-#' Standard suppressed dataframe
+#' Standard partially suppressed dataframe
 #'
 #' @returns A dataframe.
 #'
@@ -20,7 +21,8 @@ unsuppressed_df <- function() {
 suppressed_df <- function() {
   data.frame(
     x = c('*', '3', '4'),
-    y = c('4', '1', '*')
+    y = c('4', '1', '*'),
+    z = c('*', '2', '3')
   )
 }
 
@@ -33,4 +35,15 @@ suppressed_df <- function() {
 #' rc()
 rc <- function() {
   return("\\*")
+}
+
+
+#' Standard suppression columns
+#'
+#' @returns A character vector.
+#'
+#' @examples
+#' cols()
+cols <- function() {
+  return(c('x', 'y'))
 }

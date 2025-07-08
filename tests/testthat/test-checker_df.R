@@ -1,6 +1,10 @@
 test_that("checker_df() returns dataframe", {
   target_class <- "data.frame"
-  df <- suppressed_df()
+  df <- checker_df(
+    suppressed_df(),
+    supp_col = c('x', 'y', 'z'),
+    regex_char = rc()
+    )
 
   expect_equal(
     class(df),
@@ -28,6 +32,35 @@ test_that("checker_df() requires suppression columns", {
       df,
       regex_char = rc
     )
+  )
+})
+
+test_that("checker_df() only returns suppression columns", {
+  df <- suppressed_df()
+  rc <- rc()
+
+  # all columns
+  expect_equal(
+    names(
+      checker_df(
+        df,
+        supp_col = c('x', 'y', 'z'),
+        regex_char = rc
+        )
+    ),
+    c('x', 'y', 'z')
+  )
+
+  # select columns
+  expect_equal(
+    names(
+      checker_df(
+        df,
+        supp_col = c('y', 'z'),
+        regex_char = rc
+      )
+    ),
+    c('y', 'z')
   )
 })
 
@@ -84,7 +117,7 @@ test_that("checker_df() requires dataframe as input", {
 test_that("checker_df() requires supp_col to be in df", {
   df <- suppressed_df()
   rc <- rc()
-  some_bad_cols <- c("y", "z")
+  some_bad_cols <- c("y", "w")
   all_bad_cols <- c("q", "g")
   good_cols <- c("x", "y")
 
@@ -151,7 +184,7 @@ test_that("checker_df() allows number as regex character", {
 test_that("checker_df() requires suppression character", {
   df <- suppressed_df()
   empty_char <- ""
-  cols <- c("x", "y")
+  cols <- cols()
 
   # empty char
   expect_error(
