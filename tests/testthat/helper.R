@@ -27,6 +27,21 @@ suppressed_df <- function() {
 }
 
 
+#' Example dataframe returned by checker_df()
+#'
+#' @returns A dataframe.
+#'
+#' @examples
+#' checker_df_burner()
+checker_df_burner <- function() {
+  data.frame(
+    x = c(1, 0, 0),
+    y = c(0, 1, 0),
+    z = c(1, 1, 0)
+  )
+}
+
+
 #' Standard suppression regex character
 #'
 #' @returns A character string.

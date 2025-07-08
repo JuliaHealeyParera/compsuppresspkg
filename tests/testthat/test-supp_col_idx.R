@@ -1,5 +1,4 @@
 test_that("supp_col_idx() returns correct indices", {
-  target_class <- "integer"
   df <- unsuppressed_df()
   cols <- cols() # c('x', 'y'), default
 
