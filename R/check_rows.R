@@ -14,8 +14,8 @@
 #'    z = c(0, 1, 0)
 #' )
 #'
-#' supp_col_idx(x, c('x', 'y', 'z'))
-#' supp_col_idx(x, c('z'))
+#' check_rows(x, c('x', 'y', 'z'))
+#' check_rows(x, c('z'))
 check_rows <- function(checker, supp_col) {
   # Check User Input
   # Theoretically, should only accept df of checker format... build in check later
@@ -31,7 +31,7 @@ check_rows <- function(checker, supp_col) {
       supp_col,
       min.len = 1
     ),
-    checkmate::check_subset(supp_col, names(df)),
+    checkmate::check_subset(supp_col, names(checker)),
     combine = "and"
   )
 

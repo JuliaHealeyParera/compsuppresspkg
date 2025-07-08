@@ -25,6 +25,6 @@ x <-
    z = c(0, 1, 0)
 )
 
-supp_col_idx(x, c('x', 'y', 'z'))
-supp_col_idx(x, c('z'))
+check_rows(x, c('x', 'y', 'z'))
+check_rows(x, c('z'))
 }
