@@ -40,7 +40,7 @@ check_rows <- function(checker, supp_col) {
   # How many cells in a given row have been suppressed?
   if (length(supp_col_idx) > 1) {
     row_checker <- checker |>
-      mutate(
+      dplyr::mutate(
         num_supp = base::rowSums(
           checker[,supp_col_idx] #All rows, only suppression columns
         )
