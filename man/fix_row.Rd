@@ -13,7 +13,7 @@ fix_row(df, i, supp_col_idx, rc_char)
 
 \item{supp_col_idx}{Vector of indices of suppression columns.}
 
-\item{rc_char}{Non-special character to replace suppressed value.}
+\item{rc_char}{Character to replace suppressed value.}
 }
 \value{
 A dataframe.

@@ -11,7 +11,7 @@ fix_col(df, i, rc_char)
 
 \item{i}{Index of column to be fixed.}
 
-\item{rc_char}{Non-special character to replace suppressed value.}
+\item{rc_char}{Character to replace suppressed value.}
 }
 \value{
 A dataframe.

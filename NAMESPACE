@@ -3,6 +3,7 @@
 export(check_cols)
 export(check_rows)
 export(checker_df)
+export(complementary)
 export(fix_col)
 export(fix_row)
 export(supp_col_idx)

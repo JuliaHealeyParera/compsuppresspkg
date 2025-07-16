@@ -1,3 +1,22 @@
+#' Recursively fix insufficiently-suppressed rows and columns in dataframe
+#'
+#' @param df Dataframe to be checked and fixed for necessary suppression.
+#' @param supp_col Vector of columns to be checked for suppression.
+#' @param supp_col_idx Indices of supp_col in df.
+#' @param rc_char Character to replace suppressed value.
+#'
+#' @returns A dataframe.
+#' @export
+#'
+#' @examples
+#' x <-
+#'  data.frame(
+#'    x = c('-', '6', '8'),
+#'    y = c('-', '6', '-'),
+#'    z = c('10', '-', '9')
+#' )
+#'
+#' complementary(x, c('x', 'y', 'z'), c(1,2,3), '-')
 complementary <- function(df, supp_col, supp_col_idx, rc_char) {
   checkmate::assert(
     checkmate::check_data_frame(
