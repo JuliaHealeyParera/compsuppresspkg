@@ -1,14 +1,13 @@
-test_that("fix_row() returns correct dataframe", {
+test_that("fix_col() returns correct dataframe", {
   df <- suppressed_df()
-  col_idx <- supp_col_idx(df, c('x', 'y', 'z'))
   rc <- '*'
 
   # one index to choose
   expect_equal(
-    fix_row(df, 3, col_idx, rc),
-    data.frame(x = c('*', '3', '4'),
+    fix_col(df, 1, rc),
+    data.frame(x = c('*', '*', '4'),
                y = c('4', '1', '*'),
-               z = c('*', '2', '*'))
+               z = c('*', '2', '3'))
   )
 
   # two indices to choose from
@@ -16,76 +15,70 @@ test_that("fix_row() returns correct dataframe", {
                                  y = c('9', '6', '*'),
                                  z = c('*', '8', '8'),
                                  w = c('6', '8', '12'))
-  second_burner_sol1 <- data.frame(x = c('*', '13', '*'),
+  second_burner_sol1 <- data.frame(x = c('*', '13', '8'),
                                    y = c('9', '6', '*'),
-                                   z = c('*', '8', '8'),
+                                   z = c('*', '*', '8'),
                                    w = c('6', '8', '12'))
   second_burner_sol2 <- data.frame(x = c('*', '13', '8'),
                                    y = c('9', '6', '*'),
                                    z = c('*', '8', '*'),
                                    w = c('6', '8', '12'))
-  function_sol <- fix_row(second_burner_df, 3, c(1, 2, 3, 4), '*')
+  function_sol <- fix_col(second_burner_df, 3, '*')
 
   expect_true(
     isTRUE(
       all.equal(
         function_sol,
         second_burner_sol1
-        )
-      ) |
-    isTRUE(
-      all.equal(
-        function_sol,
-        second_burner_sol2
       )
-    )
+    ) |
+      isTRUE(
+        all.equal(
+          function_sol,
+          second_burner_sol2
+        )
+      )
   )
 })
 
-test_that("fix_row() returns dataframe", {
+test_that("fix_col() returns dataframe", {
   target_class <- "data.frame"
   df <- suppressed_df()
-  col_idx <- supp_col_idx(df, c('x', 'y', 'z'))
   rc <- '*'
 
   # one index to choose
   expect_equal(
-    class(fix_row(df, 3, col_idx, rc)),
+    class(fix_col(df, 3, rc)),
     target_class
   )
 })
 
-test_that("fix_row() takes proper inputs", {
+test_that("fix_col() takes proper inputs", {
   df <- suppressed_df()
-  col_idx <- supp_col_idx(df, c('x', 'y', 'z'))
   rc <- '*'
 
   # empty dataframe
   expect_error(
-    fix_row(
+    fix_col(
       data.frame(),
       3,
-      col_idx,
-      rc
-      )
-  )
-
-  # empty suppression column vector
-  expect_error(
-    fix_row(
-      df,
-      3,
-      c(),
       rc
     )
   )
 
-  # character suppression column vector
+  # no suppression character
   expect_error(
-    fix_row(
+    fix_col(
       df,
-      3,
-      c('x', 'y', 'z'),
+      3
+    )
+  )
+
+  # column index greater than ncol(df)
+  expect_error(
+    fix_col(
+      df,
+      5,
       rc
     )
   )

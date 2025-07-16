@@ -3,7 +3,7 @@
 #' @param df Dataframe with row to be fixed.
 #' @param i Index of row to be fixed.
 #' @param supp_col_idx Vector of indices of suppression columns.
-#' @param rc_char Non-special character to replace suppressed value.
+#' @param rc_char Character to replace suppressed value.
 #'
 #' @returns A dataframe.
 #' @export
