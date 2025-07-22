@@ -34,21 +34,22 @@ fix_col <- function(df, i, rc_char) {
   )
 
   # Save column to be fixed as vector
-  col <- df[,i]
+  col <- df[, i]
   # Convert to numeric, remove suppressed values and 0s (should not be supp.)
   num_col <- base::as.numeric(
     col[
       !(col %in% c(rc_char, "0"))
-      ]
-    )
+    ]
+  )
 
   # Randomly choose the index of one cell (equal to the minimum column value)
   poss_idx <- base::which(col == min(num_col))
   if (base::length(poss_idx) != 1) {
-    idx_to_supp <- base::sample(  # If multiple indices, sample
+    idx_to_supp <- base::sample(
+      # If multiple indices, sample
       poss_idx,
       size = 1
-      )
+    )
   } else {
     idx_to_supp <- poss_idx
   }

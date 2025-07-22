@@ -39,14 +39,16 @@ test_that("check_rows() takes proper inputs", {
   expect_error(
     check_rows(
       data.frame(),
-      cols)
+      cols
+    )
   )
 
   # empty suppression column vector
   expect_error(
     check_rows(
       df,
-      c())
+      c()
+    )
   )
 
   # suppression columns fully not in df
@@ -68,9 +70,11 @@ test_that("check_rows() takes proper inputs", {
   # df not of proper format
   expect_error(
     check_rows(
-      data.frame(x = c('this', 'should', 'throw'),
-                 y = c('an', 'error', 'otherwise'),
-                 z = c('function', 'not', 'right')),
+      data.frame(
+        x = c('this', 'should', 'throw'),
+        y = c('an', 'error', 'otherwise'),
+        z = c('function', 'not', 'right')
+      ),
       c('x', 'y', 'z')
     )
   )

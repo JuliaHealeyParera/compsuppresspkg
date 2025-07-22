@@ -11,7 +11,7 @@ test_that("check_cols() returns correct column indices", {
   # all columns
   expect_equal(
     check_cols(checker, c('x', 'y', 'z')),
-    c(1,2)
+    c(1, 2)
   )
 
   # one column
@@ -39,14 +39,16 @@ test_that("check_rows() takes proper inputs", {
   expect_error(
     check_cols(
       data.frame(),
-      cols)
+      cols
+    )
   )
 
   # empty suppression column vector
   expect_error(
     check_cols(
       df,
-      c())
+      c()
+    )
   )
 
   # suppression columns fully not in df
@@ -68,9 +70,11 @@ test_that("check_rows() takes proper inputs", {
   # df not of proper format
   expect_error(
     check_cols(
-      data.frame(x = c('this', 'should', 'throw'),
-                 y = c('an', 'error', 'otherwise'),
-                 z = c('function', 'not', 'right')),
+      data.frame(
+        x = c('this', 'should', 'throw'),
+        y = c('an', 'error', 'otherwise'),
+        z = c('function', 'not', 'right')
+      ),
       c('x', 'y', 'z')
     )
   )

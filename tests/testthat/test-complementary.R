@@ -1,16 +1,20 @@
 test_that("complementary() returns correct dataframe", {
-  df <- data.frame(x = c('*', '13', '8'),
-                   y = c('9', '6', '*'),
-                   z = c('*', '8', '8'))
+  df <- data.frame(
+    x = c('*', '13', '8'),
+    y = c('9', '6', '*'),
+    z = c('*', '8', '8')
+  )
   cols <- cols()
   col_idx <- supp_col_idx(df, cols)
   rc <- '*'
 
   # two indices to choose from
-  second_burner_df <- data.frame(x = c('*', '13', '8'),
-                                 y = c('9', '6', '*'),
-                                 z = c('*', '8', '8'),
-                                 w = c('6', '8', '12'))
+  second_burner_df <- data.frame(
+    x = c('*', '13', '8'),
+    y = c('9', '6', '*'),
+    z = c('*', '8', '8'),
+    w = c('6', '8', '12')
+  )
 })
 
 test_that("complementary() returns dataframe", {

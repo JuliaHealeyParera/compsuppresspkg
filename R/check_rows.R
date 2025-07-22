@@ -42,7 +42,7 @@ check_rows <- function(checker, supp_col) {
     row_checker <- checker |>
       dplyr::mutate(
         num_supp = base::rowSums(
-          checker[,supp_col_idx] #All rows, only suppression columns
+          checker[, supp_col_idx] #All rows, only suppression columns
         )
       )
 
@@ -50,11 +50,10 @@ check_rows <- function(checker, supp_col) {
     fix_rows <- base::which(
       row_checker$num_supp == 1
     )
-
   } else {
     fix_rows <- base::which(
       checker[supp_col] == 1
-      )
+    )
   }
 
   if (length(fix_rows) == 0) {
