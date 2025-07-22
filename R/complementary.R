@@ -93,7 +93,7 @@ complementary <- function(df, supp_col, supp_col_idx, rc_char) {
   }
 
   # Fix columns
-  if (!(base::length(cols_to_fix) == 1) | !(base::is.na(cols_to_fix))) {
+  if (!(base::length(cols_to_fix) == 1) || !(base::is.na(cols_to_fix))) {
     df <- purrr::reduce(
       .x = cols_to_fix,
       .init = df,

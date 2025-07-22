@@ -1,19 +1,38 @@
 test_that("complementary() returns correct dataframe", {
   df <- data.frame(
-    x = c('*', '13', '8'),
-    y = c('9', '6', '*'),
-    z = c('*', '8', '8')
+    x = c('-', '6', '8'),
+    y = c('-', '6', '-'),
+    z = c('10', '-', '9')
   )
-  cols <- cols()
+  cols <- c('x', 'y', 'z')
   col_idx <- supp_col_idx(df, cols)
-  rc <- '*'
+  rc <- '-'
 
-  # two indices to choose from
-  second_burner_df <- data.frame(
-    x = c('*', '13', '8'),
-    y = c('9', '6', '*'),
-    z = c('*', '8', '8'),
-    w = c('6', '8', '12')
+  sol1 <- data.frame(
+    x = c('-', '-', '-'),
+    y = c('-', '6', '-'),
+    z = c('10', '-', '-')
+  )
+  sol2 <- data.frame(
+    x = c('-', '6', '-'),
+    y = c('-', '-', '-'),
+    z = c('10', '-', '-')
+  )
+  function_sol <- complementary(df, cols, col_idx, rc)
+
+  expect_true(
+    isTRUE(
+      all.equal(
+        function_sol,
+        sol1
+      )
+    ) |
+      isTRUE(
+        all.equal(
+          function_sol,
+          sol2
+        )
+      )
   )
 })
 

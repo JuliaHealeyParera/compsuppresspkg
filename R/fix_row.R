@@ -16,8 +16,8 @@
 #'    z = c('10', '0', '9')
 #' )
 #'
-#' fix_row(x, 3, c('x', 'y', 'z'), '-')
-#' fix_row(x, 3, c('x', 'y') , '-')
+#' fix_row(x, 3, c(1,2,3), '-')
+#' fix_row(x, 3, c(1,2) , '-')
 fix_row <- function(df, i, supp_col_idx, rc_char) {
   checkmate::assert(
     checkmate::check_data_frame(
