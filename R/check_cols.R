@@ -40,15 +40,16 @@ check_cols <- function(checker, supp_col) {
         checker[
           base::which(
             base::names(checker) %in% supp_col
-            )
-          ]
-        ) == 1
-      )
+          )
+        ]
+      ) ==
+        1
     )
+  )
 
   if (length(fix_cols) == 0) {
     return(NA_integer_)
   }
 
-  return (fix_cols)
+  return(fix_cols)
 }

@@ -55,16 +55,18 @@ fix_row <- function(df, i, supp_col_idx, rc_char) {
     idx_to_supp <- base::sample(
       poss_idx,
       size = 1
-      ) - 1 # Subtract one to switch from 1-based indexing to 0-based indexing
+    ) -
+      1 # Subtract one to switch from 1-based indexing to 0-based indexing
   } else {
-  # Else, use only available index
+    # Else, use only available index
     idx_to_supp <- poss_idx - 1 # Switch to 0-based indexing for subsetting
   }
 
   # Suppress selected cell with suppression character
-  df[i,
-     idx_to_supp + supp_col_idx[1] # Idx within supp_col + first supp_col idx
-     ] <- rc_char
+  df[
+    i,
+    idx_to_supp + supp_col_idx[1] # Idx within supp_col + first supp_col idx
+  ] <- rc_char
 
   return(df)
 }

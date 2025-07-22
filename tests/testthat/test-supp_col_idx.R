@@ -27,8 +27,8 @@ test_that("supp_col_idx() returns integer vector", {
   cols <- cols() # c('x', 'y'), default
 
   expect_equal(
-   class(supp_col_idx(df, cols)),
-   target_class
+    class(supp_col_idx(df, cols)),
+    target_class
   )
 })
 
@@ -40,15 +40,17 @@ test_that("supp_col_idx() takes proper inputs", {
   expect_error(
     supp_col_idx(
       data.frame(),
-      cols)
+      cols
     )
+  )
 
   # empty suppression column vector
   expect_error(
     supp_col_idx(
       df,
-      c())
+      c()
     )
+  )
 
   # suppression columns fully not in df
   expect_error(
@@ -66,6 +68,3 @@ test_that("supp_col_idx() takes proper inputs", {
     )
   )
 })
-
-
-

@@ -4,7 +4,7 @@ test_that("checker_df() returns dataframe", {
     suppressed_df(),
     supp_col = c('x', 'y', 'z'),
     regex_char = rc()
-    )
+  )
 
   expect_equal(
     class(df),
@@ -46,7 +46,7 @@ test_that("checker_df() only returns suppression columns", {
         df,
         supp_col = c('x', 'y', 'z'),
         regex_char = rc
-        )
+      )
     ),
     c('x', 'y', 'z')
   )

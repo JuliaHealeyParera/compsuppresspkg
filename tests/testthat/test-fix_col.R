@@ -5,24 +5,28 @@ test_that("fix_col() returns correct dataframe", {
   # one index to choose
   expect_equal(
     fix_col(df, 1, rc),
-    data.frame(x = c('*', '*', '4'),
-               y = c('4', '1', '*'),
-               z = c('*', '2', '3'))
+    data.frame(x = c('*', '*', '4'), y = c('4', '1', '*'), z = c('*', '2', '3'))
   )
 
   # two indices to choose from
-  second_burner_df <- data.frame(x = c('*', '13', '8'),
-                                 y = c('9', '6', '*'),
-                                 z = c('*', '8', '8'),
-                                 w = c('6', '8', '12'))
-  second_burner_sol1 <- data.frame(x = c('*', '13', '8'),
-                                   y = c('9', '6', '*'),
-                                   z = c('*', '*', '8'),
-                                   w = c('6', '8', '12'))
-  second_burner_sol2 <- data.frame(x = c('*', '13', '8'),
-                                   y = c('9', '6', '*'),
-                                   z = c('*', '8', '*'),
-                                   w = c('6', '8', '12'))
+  second_burner_df <- data.frame(
+    x = c('*', '13', '8'),
+    y = c('9', '6', '*'),
+    z = c('*', '8', '8'),
+    w = c('6', '8', '12')
+  )
+  second_burner_sol1 <- data.frame(
+    x = c('*', '13', '8'),
+    y = c('9', '6', '*'),
+    z = c('*', '*', '8'),
+    w = c('6', '8', '12')
+  )
+  second_burner_sol2 <- data.frame(
+    x = c('*', '13', '8'),
+    y = c('9', '6', '*'),
+    z = c('*', '8', '*'),
+    w = c('6', '8', '12')
+  )
   function_sol <- fix_col(second_burner_df, 3, '*')
 
   expect_true(

@@ -35,7 +35,7 @@ supp_col_idx <- function(df, supp_col) {
   # Get indices for suppression columns in dataframe
   indices <- base::which(
     base::names(df) %in% supp_col
-    )
+  )
 
   return(indices)
 }
