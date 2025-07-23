@@ -20,9 +20,9 @@ unsuppressed_df <- function() {
 #' suppressed_df()
 suppressed_df <- function() {
   data.frame(
-    x = c('*', '3', '4'),
-    y = c('4', '1', '*'),
-    z = c('*', '2', '3')
+    x = c('-', '3', '4'),
+    y = c('4', '1', '-'),
+    z = c('-', '2', '3')
   )
 }
 

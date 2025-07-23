@@ -39,9 +39,9 @@ test_that("complementary() returns correct dataframe", {
 test_that("complementary() returns dataframe", {
   target_class <- "data.frame"
   df <- suppressed_df()
-  cols <- cols()
+  cols <- c('x', 'y', 'z')
   col_idx <- supp_col_idx(df, cols)
-  rc <- '*'
+  rc <- '-'
 
   # one index to choose
   expect_equal(

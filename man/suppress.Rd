@@ -4,7 +4,7 @@
 \alias{suppress}
 \title{Use complementary suppression to protect small cell counts.}
 \usage{
-suppress(df, supp_val, supp_char, supp_col, totals = c("row", "col"))
+suppress(df, supp_val, supp_char, supp_col, totals)
 }
 \arguments{
 \item{df}{Dataframe to be fixed for necessary suppression.}
@@ -15,7 +15,7 @@ suppress(df, supp_val, supp_char, supp_col, totals = c("row", "col"))
 
 \item{supp_col}{Vector of columns to be checked for suppression.}
 
-\item{totals}{"rows", "totals", both, or "none" Will dictate which totals are returned with the df.}
+\item{totals}{"rows", "totals", c("rows", "totals"), or "none" Will dictate which totals are returned with the df.}
 }
 \value{
 A dataframe.
@@ -26,9 +26,9 @@ Use complementary suppression to protect small cell counts.
 \examples{
 x <-
  data.frame(
-   x = c('1', '6', '8'),
-   y = c('2', '6', '0'),
-   z = c('10', '4', '9')
+   x = c(1, 6, 7),
+   y = c(2, 6, 0),
+   z = c(10, 4, 9)
 )
 
 suppress(x, 5, '-', c('x', 'y', 'z'), "row")

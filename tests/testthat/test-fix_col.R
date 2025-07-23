@@ -1,11 +1,14 @@
 test_that("fix_col() returns correct dataframe", {
   df <- suppressed_df()
-  rc <- '*'
+  rc <- '-'
 
   # one index to choose
   expect_equal(
     fix_col(df, 1, rc),
-    data.frame(x = c('*', '*', '4'), y = c('4', '1', '*'), z = c('*', '2', '3'))
+    data.frame(
+      x = c('-', '-', '4'),
+      y = c('4', '1', '-'),
+      z = c('-', '2', '3'))
   )
 
   # two indices to choose from
@@ -48,7 +51,7 @@ test_that("fix_col() returns correct dataframe", {
 test_that("fix_col() returns dataframe", {
   target_class <- "data.frame"
   df <- suppressed_df()
-  rc <- '*'
+  rc <- '-'
 
   # one index to choose
   expect_equal(
@@ -59,7 +62,7 @@ test_that("fix_col() returns dataframe", {
 
 test_that("fix_col() takes proper inputs", {
   df <- suppressed_df()
-  rc <- '*'
+  rc <- '-'
 
   # empty dataframe
   expect_error(

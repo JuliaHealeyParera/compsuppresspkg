@@ -4,7 +4,7 @@
 #' @param supp_val Maximum value to be suppressed (all values equal to or smaller suppressed).
 #' @param supp_char Character to be used to indicate suppressed value.
 #' @param supp_col Vector of columns to be checked for suppression.
-#' @param totals "rows", "totals", both, or "none" Will dictate which totals are returned with the df.
+#' @param totals "rows", "totals", c("rows", "totals"), or "none" Will dictate which totals are returned with the df.
 #'
 #' @returns A dataframe.
 #' @export
@@ -12,13 +12,13 @@
 #' @examples
 #' x <-
 #'  data.frame(
-#'    x = c('1', '6', '8'),
-#'    y = c('2', '6', '0'),
-#'    z = c('10', '4', '9')
+#'    x = c(1, 6, 7),
+#'    y = c(2, 6, 0),
+#'    z = c(10, 4, 9)
 #' )
 #'
 #' suppress(x, 5, '-', c('x', 'y', 'z'), "row")
-suppress <- function(df, supp_val, supp_char, supp_col, totals = c("row", "col")) {
+suppress <- function(df, supp_val, supp_char, supp_col, totals) {
   checkmate::assert(
     checkmate::check_data_frame(
       df,
@@ -43,10 +43,15 @@ suppress <- function(df, supp_val, supp_char, supp_col, totals = c("row", "col")
     combine = "and"
   )
 
+  supp_col_idx <- supp_col_idx(
+    df,
+    supp_col
+  )
+
   if ("row" %in% totals) {
     df_row_totals <- df |>
       dplyr::mutate(
-        total = rowSums(
+        Total = rowSums(
           df |>
             dplyr::select(
               tidyselect::all_of(supp_col)
@@ -54,20 +59,15 @@ suppress <- function(df, supp_val, supp_char, supp_col, totals = c("row", "col")
           na.rm = TRUE
         )
       ) |>
-      pull(total)
-
+      dplyr::pull(Total)
     if (!("col" %in% totals)) {
       df_row_totals <- base::data.frame(
-        Total = df_row_totals
-        )
+        Total = as.character(df_row_totals)
+      )
     }
   }
 
   if ("col" %in% totals) {
-    supp_col_idx <- supp_col_idx(
-      df,
-      supp_col
-      )
     fill_col_totals <- base::rep(
       supp_char,
       ncol(df)
@@ -86,16 +86,18 @@ suppress <- function(df, supp_val, supp_char, supp_col, totals = c("row", "col")
     if ("row" %in% totals) {
       df_row_totals <- base::data.frame(
         Total =
-          c(
-            df_row_totals,
-            base::sum(
-              base::as.numeric(
-                fill_col_totals[
-                  fill_col_totals != supp_char
-                  ]
+          as.character(
+            c(
+              df_row_totals,
+              base::sum(
+                base::as.numeric(
+                  fill_col_totals[
+                    fill_col_totals != supp_char
+                    ]
                 )
               )
           )
+        )
       )
     }
   }
@@ -107,7 +109,10 @@ suppress <- function(df, supp_val, supp_char, supp_col, totals = c("row", "col")
   df <- df |>
     dplyr::mutate(
       dplyr::across(
-        supp_col, ~ dplyr::if_else(
+        tidyselect::all_of(
+          supp_col
+          ),
+        ~ dplyr::if_else(
           .x <= supp_val & .x != 0,
           supp_char,
           base::as.character(.x)
