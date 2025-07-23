@@ -4,7 +4,7 @@
 \alias{complementary}
 \title{Recursively fix insufficiently-suppressed rows and columns in dataframe}
 \usage{
-complementary(df, supp_col, supp_col_idx, rc_char)
+complementary(df, supp_col, supp_col_idx, regex_char)
 }
 \arguments{
 \item{df}{Dataframe to be checked and fixed for necessary suppression.}
@@ -13,7 +13,7 @@ complementary(df, supp_col, supp_col_idx, rc_char)
 
 \item{supp_col_idx}{Indices of supp_col in df.}
 
-\item{rc_char}{Character to replace suppressed value.}
+\item{regex_char}{Character to replace suppressed value.}
 }
 \value{
 A dataframe.

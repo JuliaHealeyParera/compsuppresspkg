@@ -3,7 +3,7 @@
 #' @param df Dataframe to be checked and fixed for necessary suppression.
 #' @param supp_col Vector of columns to be checked for suppression.
 #' @param supp_col_idx Indices of supp_col in df.
-#' @param rc_char Character to replace suppressed value.
+#' @param regex_char Character to replace suppressed value.
 #'
 #' @returns A dataframe.
 #' @export
@@ -17,7 +17,7 @@
 #' )
 #'
 #' complementary(x, c('x', 'y', 'z'), c(1,2,3), '-')
-complementary <- function(df, supp_col, supp_col_idx, rc_char) {
+complementary <- function(df, supp_col, supp_col_idx, regex_char) {
   checkmate::assert(
     checkmate::check_data_frame(
       df,
@@ -38,16 +38,10 @@ complementary <- function(df, supp_col, supp_col_idx, rc_char) {
   )
 
   # Checker dataframe needs to be remade every recursive call
-  rc_cleared_char <- dplyr::if_else(
-    rc_char %in% c('*', '.'),
-    paste0('\\', rc_char),
-    rc_char
-  )
-
   checker <- checker_df(
     df,
     supp_col,
-    rc_cleared_char
+    regex_char
   )
 
   # Base case: check_rows() returns NULL AND check_cols() returns NA
@@ -55,10 +49,12 @@ complementary <- function(df, supp_col, supp_col_idx, rc_char) {
     checker,
     supp_col
   )
+
   cols_to_fix <- check_cols(
     checker,
     supp_col
   )
+
   # Base case, both rows_to_fix and cols_to_fix are NA
   if (base::length(rows_to_fix) == 1 && base::is.na(rows_to_fix)) {
     if (base::length(cols_to_fix) == 1 && base::is.na(cols_to_fix)) {
@@ -73,7 +69,7 @@ complementary <- function(df, supp_col, supp_col_idx, rc_char) {
           acc, # For each call to fix_row, first argument is newly edited dataframe
           i, # For each call to fix_row, second argument is next row to fix
           supp_col_idx,
-          rc_char
+          regex_char
         )
       },
       .init = df # Initial input: (current, from this recursive call) df
@@ -83,7 +79,7 @@ complementary <- function(df, supp_col, supp_col_idx, rc_char) {
     checker <- checker_df(
       df,
       supp_col,
-      rc_cleared_char
+      regex_char
     )
 
     cols_to_fix <- check_cols(
@@ -98,11 +94,11 @@ complementary <- function(df, supp_col, supp_col_idx, rc_char) {
       .x = cols_to_fix,
       .init = df,
       .f = function(acc, col_idx) {
-        fix_col(acc, col_idx, rc_char)
+        fix_col(acc, col_idx, regex_char)
       }
     )
   }
 
   # Recurse with edited dataframe
-  complementary(df, supp_col, supp_col_idx, rc_char)
+  complementary(df, supp_col, supp_col_idx, regex_char)
 }
