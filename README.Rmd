@@ -29,9 +29,16 @@ pak::pak("JuliaHealeyParera/compsuppress")
 
 ## Example
 
-Basic examples will soon be housed below. 
-
 ```{r example}
 library(compsuppress)
-## basic example code coming soon
+
+x <- data.frame( 
+  x = c('ggg', 'hhh', 'iii', 'xxx', 'aaa', 'sss', 'ddd'),
+  y = c(1, 2, 34, 12, 23, 12, 1),
+  z = c(23, 41, 1, 0, 24, 21, 1),
+  w = c(123, 3, 12, 2, 23, 45, 3), 
+  r = c(45, 23, 5, 34, 1, 23, 4)
+)
+
+suppress(x, 5, '-', c('y', 'z', 'w', 'r'), "none")
 ```
