@@ -18,7 +18,7 @@
 #' )
 #'
 #' suppress(x, 5, '-', c('x', 'y', 'z'), "row")
-suppress <- function(df, supp_val, supp_char, supp_col, totals) {
+suppress <- function(df, supp_val, supp_char, supp_col, totals = 'none') {
   checkmate::assert(
     checkmate::check_data_frame(
       df,

@@ -32,13 +32,13 @@ x <- data.frame(
   r = c(45, 23, 5, 34, 1, 23, 4)
 )
 
-suppress(x, 5, '-', c('y', 'z', 'w', 'r'), "none")
+suppress(x, 5, '-', c('y', 'z', 'w', 'r'))
 #>     x  y  z   w  r
 #> 1 ggg  -  - 123 45
 #> 2 hhh  - 41   - 23
 #> 3 iii 34  -  12  -
 #> 4 xxx  -  0   - 34
-#> 5 aaa 23 24   -  -
+#> 5 aaa  - 24  23  -
 #> 6 sss 12 21  45 23
 #> 7 ddd  -  -   -  -
 ```
