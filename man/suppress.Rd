@@ -4,7 +4,7 @@
 \alias{suppress}
 \title{Use complementary suppression to protect small cell counts.}
 \usage{
-suppress(df, supp_val, supp_char, supp_col, totals)
+suppress(df, supp_val, supp_char, supp_col, totals = "none")
 }
 \arguments{
 \item{df}{Dataframe to be fixed for necessary suppression.}

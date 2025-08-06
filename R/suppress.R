@@ -136,21 +136,21 @@ suppress <- function(df, supp_val, supp_char, supp_col, totals = 'none') {
     supp_col_idx,
     base::as.character(regex_char)
     )
+  if ("col" %in% totals) {
+    df <- base::rbind(
+      df,
+      fill_col_totals
+    )
+    base::row.names(df) <- c(
+      c(2:base::nrow(df) - 1),
+      "Total"
+    )
+  }
   if ("row" %in% totals) {
     df <- base::cbind(
       df,
       df_row_totals
       )
     }
-  if ("col" %in% totals) {
-    df <- base::rbind(
-      df,
-      fill_col_totals
-      )
-    base::row.names(df) <- c(
-      c(2:base::nrow(df) - 1),
-      "Total"
-      )
-  }
   return(df)
 }

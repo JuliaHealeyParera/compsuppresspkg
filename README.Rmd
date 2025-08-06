@@ -41,4 +41,5 @@ x <- data.frame(
 )
 
 suppress(x, 5, '-', c('y', 'z', 'w', 'r'))
+suppress(x, 10, '-', c('y', 'z', 'w', 'r'), c('row', 'col'))
 ```
